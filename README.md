@@ -64,11 +64,6 @@ The application automates a simplified marketing campaign workflow.
 6. **Revision Agent** — if validation fails, the content is revised and sent back through validation.
 7. **Final Campaign JSON** — once the campaign passes validation, the final structured campaign is returned.
 
-```
-
-**Important:** In your README, don't put the workflow inside normal Markdown text using `|` characters. The triple backticks around the diagram make GitHub display it exactly as a diagram instead of converting it into a table.
-```
-
 2. Technology stack
 
 Technology
