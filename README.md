@@ -6,64 +6,68 @@ The application takes a campaign brief, retrieves relevant brand/product informa
 
 Portfolio project: This repository is designed to demonstrate practical Agentic AI, RAG, structured LLM output, API development, validation, and workflow orchestration.
 
-1. What this project does
+## 1. What this project does
 
-The application automates a simplified marketing campaign workflow:
+The application automates a simplified marketing campaign workflow.
 
-Campaign Request
+### Campaign Workflow
+
+```text
++----------------------+
+|   Campaign Request   |
++----------+-----------+
+           |
+           v
++----------------------+
+|    Campaign Plan     |
++----------+-----------+
+           |
+           v
++----------------------+
+|    ChromaDB RAG      |
+| Brand + Product      |
+| Knowledge            |
++----------+-----------+
+           |
+           v
++----------------------+
+|     Gemini LLM       |
+|    Content Agent     |
++----------+-----------+
+           |
+           v
++----------------------+
+| Pydantic + Rule      |
+|     Validator        |
++----------+-----------+
+           |
+        Valid?
+       /      \
+     No        Yes
+     |          |
+     v          v
++------------+  +----------------------+
+| Revision   |  | Final Campaign JSON  |
+|   Agent    |  +----------------------+
++-----+------+
       |
-      v
-+----------------+
-| Campaign Plan  |
-+----------------+
-      |
-      v
-+----------------+
-| ChromaDB RAG   | <--- Brand + Product Knowledge
-+----------------+
-      |
-      v
-+----------------+
-| Gemini LLM     |
-| Content Agent  |
-+----------------+
-      |
-      v
-+----------------+
-| Pydantic +     |
-| Rule Validator |
-+----------------+
-      |
-   valid? ---- No ----> Revision Agent
-      |                      |
-     Yes <-------------------+
-      |
-      v
- Final Campaign JSON
+      +------> Back to Validator
+```
 
-Main capabilities
+### Workflow Explanation
 
-Accept campaign requirements through a REST API.
+1. **Campaign Request** — receives the marketing campaign requirements.
+2. **Campaign Plan** — creates a structured plan based on the request.
+3. **ChromaDB RAG** — retrieves relevant brand and product knowledge.
+4. **Gemini LLM / Content Agent** — generates the campaign content using the retrieved context.
+5. **Pydantic + Rule Validator** — checks the generated campaign against the required structure and rules.
+6. **Revision Agent** — if validation fails, the content is revised and sent back through validation.
+7. **Final Campaign JSON** — once the campaign passes validation, the final structured campaign is returned.
 
-Validate incoming requests with Pydantic.
+```
 
-Store brand/product knowledge in ChromaDB.
-
-Retrieve relevant context using semantic search.
-
-Generate structured campaign content using Gemini.
-
-Generate email content and social-media content according to requested channels.
-
-Validate output length and required content.
-
-Automatically run a revision loop when validation fails.
-
-Keep workflow state with LangGraph.
-
-Expose interactive Swagger/OpenAPI documentation.
-
-Run locally without requiring a separate database server.
+**Important:** In your README, don't put the workflow inside normal Markdown text using `|` characters. The triple backticks around the diagram make GitHub display it exactly as a diagram instead of converting it into a table.
+```
 
 2. Technology stack
 
